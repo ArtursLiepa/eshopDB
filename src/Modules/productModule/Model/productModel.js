@@ -10,7 +10,6 @@ const productSchema = new Schema(
     categoryName: { type: String, required: true },
     segmentID: { type: Number, required: true },
     segmentName: { type: String, required: true },
-    id: { type: Number, required: true },
   },
   { timestamps: true },
 );

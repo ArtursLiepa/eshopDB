@@ -1,11 +1,11 @@
 const express = require("express");
-const Categories = require("../Model/categoryModel");
+const categories = require("../Model/categoryModel");
 
 const getCategories = async (req, res) => {
   try {
-    const categories = await Categories.find({});
-    console.log(categories);
-    res.status(200).json(categories);
+    const category = await categories.find({});
+    console.log(category);
+    res.status(200).json(category);
   } catch (error) {
     console.log(error);
   }

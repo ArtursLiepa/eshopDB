@@ -15,8 +15,8 @@ app.use("/segments", segmentRoutes);
 app.use("/categories", categoryRoutes);
 app.use("/products", productRoutes);
 
-const API_URL = 3005;
-const DB_URL = "mongodb://localhost:27017/practiceData";
+const API_URL = 3000;
+const DB_URL = "mongodb://mongodb/practiceData";
 
 async function startServer() {
   mongoose
@@ -27,7 +27,7 @@ async function startServer() {
         console.log(`App is listening on port ${API_URL}`);
       });
     })
-    .catch("error", (error) => {
+    .catch((error) => {
       console.log(error);
     });
 }

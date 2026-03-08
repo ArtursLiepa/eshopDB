@@ -9,6 +9,6 @@ const segmentSchema = new Schema({
   id: { type: Number, required: true },
 });
 
-const Segments = mongoose.model("Segments", segmentSchema);
+const segments = mongoose.model("segments", segmentSchema);
 
-module.exports = Segments;
+module.exports = segments;
