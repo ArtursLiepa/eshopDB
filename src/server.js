@@ -16,7 +16,11 @@ app.use("/categories", categoryRoutes);
 app.use("/products", productRoutes);
 
 const API_URL = 3000;
-const DB_URL = "mongodb://mongodb/practiceData";
+/*This is for connecting to MongoDB container server*/
+// const DB_URL = "mongodb://mongodb/practiceData";
+
+/*This is for connecting to MongoDB local server*/
+const DB_URL = "mongodb://localhost:27017/practiceData";
 
 async function startServer() {
   mongoose

@@ -12,4 +12,15 @@ const getProducts = async (req, res) => {
   }
 };
 
-module.exports = { getProducts };
+const getProduct = async (req, res) => {
+  try {
+    const productId = req.params.productID;
+    const product = await products.findOne({ productID: productId });
+    console.log(product);
+    res.status(200).json(product);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = { getProducts, getProduct };
