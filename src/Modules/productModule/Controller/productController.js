@@ -1,11 +1,12 @@
 const express = require("express");
-const Products = require("../Model/productModel");
+const products = require("../Model/productModel");
 
 const getProducts = async (req, res) => {
   try {
-    const products = await Products.find({});
-    console.log(products);
-    res.status(200).json(products);
+    const segment = req.query.segmentName;
+    const productList = await products.find({ segmentName: segment });
+    console.log(productList);
+    res.status(200).json(productList);
   } catch (error) {
     console.log(error);
   }
