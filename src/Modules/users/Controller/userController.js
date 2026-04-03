@@ -1,5 +1,5 @@
 const express = require("express");
-const users = require("../Model/users");
+const users = require("../Model/userModel");
 const jwt = require("jsonwebtoken");
 
 const createUser = async (req, res) => {
@@ -13,29 +13,18 @@ const createUser = async (req, res) => {
   }
 };
 
-const getUsers = async (req, res) => {
+const getUser = async (req, res) => {
   try {
-    const userName = req.body.username;
-    console.log(userName);
-    const user = await users
-      .findOne({ username: userName })
-      .select("+password");
-    if (!user)
-      return res.status(401).json({ error: "Username does not exist" });
-
-    const userPassword = req.body.password;
-    console.log(userPassword);
-    const password = await user.comparePassword(userPassword);
-    if (!password) return res.status(401).json({ error: "Incorrect password" });
-
-    const token = jwt.sign({ id: user._id }, "SECRET_KEY", {
-      expiresIn: "1h",
-    });
-    res.json({ token });
+    const userId = req.user.id;
+    console.log(userId);
+    const user = await users.findById({ _id: userId }).select("-password");
+    if (!user) return res.status(401).json({ error: "User not found" });
+    console.log(user);
+    res.status(200).json(user);
   } catch (err) {
     res.status(500).json({ error: err.message });
     console.log(err);
   }
 };
 
-module.exports = { getUsers, createUser };
+module.exports = { createUser, getUser };

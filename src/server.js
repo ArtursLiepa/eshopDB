@@ -6,7 +6,8 @@ const itemRoutes = require("./Modules/Items/Routes/item-router");
 const segmentRoutes = require("./Modules/segmentModule/Routes/segment-routes");
 const categoryRoutes = require("./Modules/categoryModule/Routes/category-routes");
 const productRoutes = require("./Modules/productModule/Routes/product-routes");
-const usersRoutes = require("./Modules/users/Routes/users-route");
+const authRoute = require("./Modules/Authentication/Routes/auth-route");
+const userRoutes = require("./Modules/Users/Routes/user-route");
 
 const app = express();
 app.use(CORS());
@@ -15,7 +16,8 @@ app.use("/items", itemRoutes);
 app.use("/segments", segmentRoutes);
 app.use("/categories", categoryRoutes);
 app.use("/products", productRoutes);
-app.use("/auth", usersRoutes);
+app.use("/auth", authRoute);
+app.use("/user", userRoutes);
 
 const API_URL = 3000;
 /*This is for connecting to MongoDB container server*/
