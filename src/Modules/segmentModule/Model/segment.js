@@ -6,6 +6,8 @@ const segmentSchema = new Schema({
   categoryName: { type: String, required: true },
   segmentID: { type: Number, required: true },
   segmentName: { type: String, required: true },
+  segmentImage: { type: String, required: false },
+
   id: { type: Number, required: true },
 });
 
