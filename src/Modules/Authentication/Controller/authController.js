@@ -1,5 +1,5 @@
 const express = require("express");
-const users = require("../../Users/Model/userModel");
+const users = require("../../usersModule/Model/userModel");
 const jwt = require("jsonwebtoken");
 
 const authenticateUser = async (req, res) => {

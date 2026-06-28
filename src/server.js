@@ -12,7 +12,7 @@ const segmentRoutes = require("./Modules/segmentModule/Routes/segment-routes");
 const categoryRoutes = require("./Modules/categoryModule/Routes/category-routes");
 const productRoutes = require("./Modules/productModule/Routes/product-routes");
 const authRoute = require("./Modules/Authentication/Routes/auth-route");
-const userRoutes = require("./Modules/Users/Routes/user-route");
+const userRoutes = require("./Modules/usersModule/Routes/user-route");
 
 app.use("/items", itemRoutes);
 app.use("/segments", segmentRoutes);
