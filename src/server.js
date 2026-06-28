@@ -24,13 +24,14 @@ app.use("/user", userRoutes);
 // API_URL = 3000;
 // DB_URL = "mongodb://localhost:27017/practiceData";
 DB_URL = process.env.CLDB_URL;
+API_URL = process.env.API_URL;
 async function startServer() {
   await mongoose
     .connect(DB_URL)
     .then(() => {
       console.log("Database connected!".bgGreen);
-      app.listen(process.env.API_URL, () => {
-        console.log(`App is listening on port ${process.env.API_URL}`);
+      app.listen(API_URL, () => {
+        console.log(`App is listening on port ${API_URL}`);
       });
     })
     .catch((error) => {
