@@ -1,7 +1,12 @@
 const express = require("express");
 const CORS = require("cors");
 const mongoose = require("mongoose");
+require("dotenv").config();
 const colors = require("colors");
+const app = express();
+app.use(CORS());
+app.use(express.json());
+
 const itemRoutes = require("./Modules/Items/Routes/item-router");
 const segmentRoutes = require("./Modules/segmentModule/Routes/segment-routes");
 const categoryRoutes = require("./Modules/categoryModule/Routes/category-routes");
@@ -9,9 +14,6 @@ const productRoutes = require("./Modules/productModule/Routes/product-routes");
 const authRoute = require("./Modules/Authentication/Routes/auth-route");
 const userRoutes = require("./Modules/Users/Routes/user-route");
 
-const app = express();
-app.use(CORS());
-app.use(express.json());
 app.use("/items", itemRoutes);
 app.use("/segments", segmentRoutes);
 app.use("/categories", categoryRoutes);
@@ -19,20 +21,16 @@ app.use("/products", productRoutes);
 app.use("/auth", authRoute);
 app.use("/user", userRoutes);
 
-const API_URL = 3000;
-/*This is for connecting to MongoDB container server*/
-// const DB_URL = "mongodb://mongodb/practiceData";
-
-/*This is for connecting to MongoDB local server*/
-const DB_URL = "mongodb://localhost:27017/practiceData";
-
+// API_URL = 3000;
+// DB_URL = "mongodb://localhost:27017/practiceData";
+DB_URL = process.env.CLDB_URL;
 async function startServer() {
-  mongoose
+  await mongoose
     .connect(DB_URL)
     .then(() => {
       console.log("Database connected!".bgGreen);
-      app.listen(API_URL, () => {
-        console.log(`App is listening on port ${API_URL}`);
+      app.listen(process.env.API_URL, () => {
+        console.log(`App is listening on port ${process.env.API_URL}`);
       });
     })
     .catch((error) => {
