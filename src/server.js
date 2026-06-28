@@ -27,9 +27,8 @@ const DB_URL = process.env.CLDB_URL;
 const API_URL = process.env.API_URL;
 async function startServer() {
   try {
-    await mongoose.connect(DB_URL).then(() => {
+    await mongoose.connect(DB_URL);
     console.log("Database connected!".bgGreen);
-
     console.log("Mongo connected:", mongoose.connection.name);
 
     const collections = await mongoose.connection.db
@@ -38,12 +37,11 @@ async function startServer() {
 
     console.log(
       "Collections:",
-      collections.map((c) => c.name)
+      collections.map((c) => c.name),
     );
 
-      app.listen(API_URL, () => {
-        console.log(`App is listening on port ${API_URL}`);
-      });
+    app.listen(API_URL, () => {
+      console.log(`App is listening on port ${API_URL}`);
     });
   } catch (error) {
     console.log(error);
