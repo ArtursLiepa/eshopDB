@@ -23,20 +23,31 @@ app.use("/user", userRoutes);
 
 // API_URL = 3000;
 // DB_URL = "mongodb://localhost:27017/practiceData";
-DB_URL = process.env.CLDB_URL;
-API_URL = process.env.API_URL;
+const DB_URL = process.env.CLDB_URL;
+const API_URL = process.env.API_URL;
 async function startServer() {
-  await mongoose
-    .connect(DB_URL)
-    .then(() => {
-      console.log("Database connected!".bgGreen);
+  try {
+    await mongoose.connect(DB_URL).then(() => {
+    console.log("Database connected!".bgGreen);
+
+    console.log("Mongo connected:", mongoose.connection.name);
+
+    const collections = await mongoose.connection.db
+      .listCollections()
+      .toArray();
+
+    console.log(
+      "Collections:",
+      collections.map((c) => c.name)
+    );
+
       app.listen(API_URL, () => {
         console.log(`App is listening on port ${API_URL}`);
       });
-    })
-    .catch((error) => {
-      console.log(error);
     });
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 app.get("/", (req, res) => {
