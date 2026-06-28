@@ -14,7 +14,7 @@ const authenticateUser = async (req, res) => {
 
     const userPassword = req.body.password;
     console.log(userPassword);
-    const password = await users.comparePassword(userPassword);
+    const password = await user.comparePassword(userPassword);
     if (!password) return res.status(401).json({ error: "Incorrect password" });
 
     const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY, {
